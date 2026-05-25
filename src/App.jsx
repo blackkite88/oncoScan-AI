@@ -6,7 +6,7 @@ import Disclaimer from './components/Disclaimer';
 import LoadingSpinner from './components/LoadingSpinner';
 import ErrorAlert from './components/ErrorAlert';
 
-const BASE_URL = "/api";
+const BASE_URL = "/http://34.100.210.180";
 
 export default function App() {
   // State variables
@@ -113,7 +113,7 @@ export default function App() {
 
       {/* Main Content Area */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-6 py-10 z-10">
-        
+
         {/* Action errors */}
         {error && (
           <div className="mb-6">
@@ -123,7 +123,7 @@ export default function App() {
 
         {/* Side-by-Side Panel Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
+
           {/* Left Panel: Upload & Controls */}
           <section className="lg:col-span-5 bg-medical-card/25 border border-medical-border rounded-2xl p-6 backdrop-blur-sm space-y-6">
             <div className="space-y-1">
@@ -135,7 +135,7 @@ export default function App() {
               </p>
             </div>
 
-            <UploadZone 
+            <UploadZone
               uploadedFile={uploadedFile}
               previewUrl={previewUrl}
               onFileChange={handleFileChange}
@@ -149,12 +149,12 @@ export default function App() {
           <section className="lg:col-span-7 h-full flex flex-col">
             {isLoading ? (
               <div className="w-full bg-medical-card/30 border border-medical-border rounded-2xl p-6 flex items-center justify-center min-h-[400px]">
-                <LoadingSpinner 
-                  message={activeTab === 'predict' ? "Predicting Tumor Class..." : "Generating Heatmap & Report..."} 
+                <LoadingSpinner
+                  message={activeTab === 'predict' ? "Predicting Tumor Class..." : "Generating Heatmap & Report..."}
                 />
               </div>
             ) : (
-              <ResultsPanel 
+              <ResultsPanel
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}
                 predictResult={predictResult}
