@@ -29,15 +29,16 @@ const CLASS_CONFIGS = {
 
 export default function PredictionResult({ result }) {
   const [animatedWidth, setAnimatedWidth] = useState(0);
+  const confidencePercent = result ? (result.confidence > 1 ? result.confidence : result.confidence * 100) : 0;
 
   useEffect(() => {
     // Reset and trigger CSS animation on result mount/change
     setAnimatedWidth(0);
     const timer = setTimeout(() => {
-      setAnimatedWidth((result.confidence * 100));
+      setAnimatedWidth(confidencePercent);
     }, 100);
     return () => clearTimeout(timer);
-  }, [result]);
+  }, [result, confidencePercent]);
 
   if (!result) {
     return (
@@ -86,7 +87,7 @@ export default function PredictionResult({ result }) {
           <div className="flex justify-between items-end font-mono">
             <span className="text-[11px] text-slate-400">Model Confidence</span>
             <span className={`text-base font-bold ${classConfig.textColor}`}>
-              {(result.confidence * 100).toFixed(2)}%
+              {confidencePercent.toFixed(2)}%
             </span>
           </div>
           
@@ -110,7 +111,7 @@ export default function PredictionResult({ result }) {
         <div className="space-y-3 bg-[#0d1326]/40 border border-slate-800/60 rounded-xl p-5 font-mono">
           {Object.entries(CLASS_CONFIGS).map(([key, config]) => {
             const probValue = probabilities[key] ?? 0;
-            const probPercentage = probValue * 100;
+            const probPercentage = probValue > 1 ? probValue : probValue * 100;
             const isPredictedClass = key === currentClass;
 
             return (
