@@ -60,12 +60,7 @@ export default function PredictionResult({ result }) {
   };
 
   // Extract classes from probabilities
-  const probabilities = result.probabilities || {
-    glioma: currentClass === 'glioma' ? result.confidence : 0,
-    meningioma: currentClass === 'meningioma' ? result.confidence : 0,
-    notumor: currentClass === 'notumor' ? result.confidence : 0,
-    pituitary: currentClass === 'pituitary' ? result.confidence : 0,
-  };
+  const probabilities = result.probabilities || {};
 
   return (
     <div className="space-y-8 animate-fade-in">
