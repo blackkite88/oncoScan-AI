@@ -6,7 +6,7 @@ import Disclaimer from './components/Disclaimer';
 import LoadingSpinner from './components/LoadingSpinner';
 import ErrorAlert from './components/ErrorAlert';
 
-const BASE_URL = "/http://34.100.210.180";
+const BASE_URL = "/api";
 
 export default function App() {
   // State variables
