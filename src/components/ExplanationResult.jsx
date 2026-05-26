@@ -54,15 +54,18 @@ export default function ExplanationResult({ result }) {
 
         <div className="bg-[#0d1326]/40 border border-slate-800/60 rounded-xl p-4 flex flex-col items-center justify-center gap-4">
           <div className="relative aspect-square w-full max-w-[280px] bg-slate-950 rounded-lg overflow-hidden border border-cyan-500/25 flex items-center justify-center">
-            {result.heatmap ? (
-              <img 
-                src={result.heatmap.startsWith('data:') ? result.heatmap : `data:image/png;base64,${result.heatmap}`}
-                alt="Grad-CAM Activation Heatmap" 
-                className="max-h-full max-w-full object-contain filter brightness-95 contrast-105"
-              />
-            ) : (
-              <div className="text-slate-500 font-mono text-[10px]">No Heatmap Rendered</div>
-            )}
+            {(() => {
+              const heatmapData = result.heatmap_b64 || result.heatmap;
+              return heatmapData ? (
+                <img 
+                  src={heatmapData.startsWith('data:') ? heatmapData : `data:image/jpeg;base64,${heatmapData}`}
+                  alt="Grad-CAM Activation Heatmap" 
+                  className="max-h-full max-w-full object-contain filter brightness-95 contrast-105"
+                />
+              ) : (
+                <div className="text-slate-500 font-mono text-[10px]">No Heatmap Rendered</div>
+              );
+            })()}
             
             {/* Corner Crosshairs */}
             <div className="absolute top-1.5 left-1.5 w-3 h-3 border-t border-l border-cyan-400/40" />
